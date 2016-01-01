@@ -235,6 +235,7 @@ my $valid_lxc_conf_keys = {
     'lxc.rootfs.mount' => 1,
     'lxc.rootfs.options' => 1,
     # lxc.cgroup.*
+    'lxc.monitor.unshare' => 1,
     'lxc.cap.drop' => 1,
     'lxc.cap.keep' => 1,
     'lxc.aa_profile' => 1,
@@ -1081,8 +1082,7 @@ sub update_lxc_config {
 	die "implement me (ostype $ostype)";
     }
 
-    my $unshare = defined($conf->{unshare}) ? $conf->{unshare} : 1;
-    $raw .= "lxc.monitor.unshare = $unshare\n";
+    $raw .= "lxc.monitor.unshare = 1\n";
 
     # Should we read them from /etc/subuid?
     if ($unprivileged && !$custom_idmap) {
