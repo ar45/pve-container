@@ -1081,7 +1081,8 @@ sub update_lxc_config {
 	die "implement me (ostype $ostype)";
     }
 
-    $raw .= "lxc.monitor.unshare = 1\n";
+    my $unshare = defined($conf->{unshare}) ? $conf->{unshare} : 1;
+    $raw .= "lxc.monitor.unshare = $unshare\n";
 
     # Should we read them from /etc/subuid?
     if ($unprivileged && !$custom_idmap) {
